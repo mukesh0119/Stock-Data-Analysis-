@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Financial Risk Analysis System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(120deg, #fdfbfb, #ebedee);
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1f4068;
+            color: #fff;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 10px rgba(0,0,0,0.7);
+        }
+
+        .navbar .logo {
+            width: 150px;
+            height: 50px;
+            filter: drop-shadow(0px 0px 3px #f9ed69);
+        }
+
+        .navbar .title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .navbar .links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar .links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .navbar .links a:hover {
+            color: #ddd;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #e8e8e8;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+            margin-top: 100px;
+            margin-bottom: 50px;
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            color: #444;
+            text-align: center;
+            font-size: 2em;
+            padding: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #333;
+            font-size: 1.2em;
+        }
+
+        select,
+        input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            width: 100%;
+            max-width: 300px;
+            background-color: #fff;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #52796f;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2em;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ff6b6b;
+            transform: scale(1.05);
+        }
+
+        a {
+            display: block;
+            color: #1f4068;
+            margin-top: 10px;
+            text-decoration: none;
+            font-size: 1.2em;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #52796f;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img class="logo" src="static/images/logo.jpg" alt="Your Logo">
+        <div class="title">Financial Risk Analysis System</div>
+        <div class="links">
+            <a href="/audit">Audit Page</a>
+            <a href="/terminate">Terminate </a>
+            <a href="/reset">Reset </a>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Perform Analysis</h2>
+        <form action="/analyze" method="post">
+            <label for="history">Length of Price History (H):</label>
+            <br>
+            <input type="number" id="history" name="history" min="1">
+            <br>
+            <label for="data_points">Number of Data Points (D):</label>
+            <br>
+            <input type="number" id="data_points" name="data_points" min="1">
+            <br>
+            <label for="signal_type">Signal Type (T):</label>
+            <br>
+            <select id="signal_type" name="signal_type">
+                <option value="buy">Buy</option>
+                <option value="sell">Sell</option>
+            </select>
+            <br>
+            <label for="days">Number of Days to Check Profit (P):</label>
+            <br>
+            <input type="number" id="days" name="days" min="1">
+            <br>
+            <input type="submit" value="Analyze">
+         </form>
+    </div>
+</body>
+</html>
+

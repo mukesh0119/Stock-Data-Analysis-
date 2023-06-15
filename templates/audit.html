@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Financial Risk Analysis System - Audit</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(120deg, #fdfbfb, #ebedee);
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1f4068;
+            color: #fff;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 10px rgba(0,0,0,0.7);
+        }
+
+        .navbar .logo {
+            width: 150px;
+            height: 50px;
+            filter: drop-shadow(0px 0px 3px #f9ed69);
+        }
+
+        .navbar .title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .navbar .links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar .links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .navbar .links a:hover {
+            color: #ddd;
+        }
+
+        .container {
+            max-width: 2000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #e8e8e8;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+            margin-top: 100px;
+            margin-bottom: 50px;
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            color: #444;
+            text-align: center;
+            font-size: 2em;
+            padding: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        table {
+            width: 100%;
+            table-layout: fixed;
+            text-align: center;
+            margin-top: 30px;
+            border-collapse: collapse;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        th {
+            background-color: #52796f;
+            color: #fff;
+            padding: 10px;
+            white-space: nowrap;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        a {
+            display: block;
+            color: #1f4068;
+            margin-top: 10px;
+            text-decoration: none;
+            font-size: 1.2em;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #52796f;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img class="logo" src="static/images/logo.jpg" alt="Your Logo">
+        <div class="title">Financial Risk Analysis System</div>
+        <div class="links">
+            <a href="/audit">Audit Page</a>
+            <a href="/terminate">Terminate </a>
+            <a href="/reset">Reset </a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Financial Risk Analysis System - Audit</h1>
+
+        <h2>Audit Table</h2>
+        <table>
+            <tr style="background-color:#ddd;">
+                <th>Service</th>
+                <th>Num Resources</th>
+                <th>Min History</th>
+                <th>Data Points</th>
+                <th>Signal Type</th>
+                <th>Days</th>
+                <th>Var95 Mean</th>
+                <th>Var99 Mean</th>
+                <th>Runtime</th>
+            </tr>
+            <!-- Your data goes here, in the format <tr><td>service</td><td>num_resources</td><td>minhistory</td><td>shots</td><td>signal_type</td><td>days</td><td>var95_mean</td><td>var99_mean</td><td>runtime</td></tr> -->
+            <!-- This data should be passed from your Python code -->
+            {% for row in audit_data %}
+            <tr>
+                <td>{{ row.service }}</td>
+                <td>{{ row.num_resources }}</td>
+                <td>{{ row.minhistory }}</td>
+                <td>{{ row.shots }}</td>
+                <td>{{ row.signal_type }}</td>
+                <td>{{ row.days }}</td>
+                <td>{{ row.var95_mean }}</td>
+                <td>{{ row.var99_mean }}</td>
+                <td>{{ row.runtime }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>

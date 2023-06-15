@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Financial Risk Analysis System - Output</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1f4068;
+            color: #ffffff;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar .logo {
+            width: 150px;
+            height: 50px;
+        }
+
+        .navbar .title {
+            font-size: 2em;
+        }
+
+        .navbar .links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar .links a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .navbar .links a:hover {
+            color: #acb6e5;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+            margin-bottom: 50px;
+        }
+
+        h1, h2 {
+            color: #3c3e44;
+            text-align: center;
+            font-size: 2em;
+            padding: 20px;
+        }
+
+        a {
+            display: block;
+            color: #52796f;
+            margin-top: 10px;
+            text-decoration: none;
+            font-size: 1.2em;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #354f52;
+            transform: scale(1.1);
+        }
+
+        .profit-loss-cell {
+            font-weight: bold;
+        }
+
+        .profit-loss-positive {
+            color: #388e3c;
+        }
+
+        .profit-loss-negative {
+            color: #d32f2f;
+        }
+
+        /* Additional Designs */
+
+        /* Chart Styling */
+        #curve_chart {
+            margin-top: 30px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            table-layout: fixed;
+            text-align: center;
+            margin-top: 30px;
+            border-collapse: collapse;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background-color: #f1f1f1;
+            padding: 10px;
+            white-space: nowrap;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            word-wrap: break-word;
+            max-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Table Scroll Styling */
+        .table-wrapper {
+            overflow-x: auto;
+            max-height: 400px; /* Set a maximum height for the scrollable area */
+        }
+
+        /* Scrollable Body */
+        .table-wrapper tbody {
+            overflow-y: scroll;
+        }
+
+        /* Button Styling */
+        .btn {
+            display: inline-block;
+            background-color: #52796f;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+    background-color: #354f52;
+    color: #ffffff;  /* New rule for text color on hover */
+}
+
+
+        /* Page Styling */
+        .chart-container {
+            background-color: #e9e9e9;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+            border-radius: 5px;
+        }
+
+        .table-container {
+            background-color: #e9e9e9;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+            border-radius: 5px;
+            overflow: auto;
+        }
+
+        .back-btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable({{ chart_data | safe }});
+
+
+            var options = {
+                title: 'Risk Analysis',
+                curveType: 'function',
+                legend: { position: 'bottom' },
+                series: {
+                    3: { lineWidth: 2, lineDashStyle: [4, 4] }, // Mean 95% Risk
+                    4: { lineWidth: 2, lineDashStyle: [4, 4] }  // Mean 99% Risk
+                },
+                hAxis: {
+                    title: 'Signal Date' // Set x-axis label to represent signal date
+                },
+                chartArea: {  // Add this to your options
+                    left: '5%',
+                    width: '90%'
+                }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+<div class="navbar">
+    <img class="logo" src="static/images/logo.jpg" alt="Your Logo">
+    <div class="title">Financial Risk Analysis System</div>
+    <div class="links">
+        <a href="/audit">Audit Page</a>
+        <a href="/terminate">Terminate </a>
+        <a href="/reset">Reset </a>
+    </div>
+</div>
+<div class="container">
+    <h1>Financial Risk Analysis System - Output</h1>
+    <div class="chart-container">
+        <h2>Risk Analysis Chart</h2>
+        <div id="curve_chart" style="width: 100%; height: 600px"></div>
+    </div>
+    <div class="table-container">
+        <h2>Full Risk Analysis Table</h2>
+        <div class="table-wrapper">
+            <table>
+                <colgroup>
+                    <col style="width: 5%;">
+                    <col style="width: 5%;">
+                    <col style="width: 9%;">
+                    <col style="width: 9%;">
+                    <col style="width:10%;">
+                    <col style="width:10%;">
+                    <col style="width: 10%;">
+                    <col style="width: 12%;">
+                    <col style="width: 7%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th style="position: sticky; top: 0; background-color: #f1f1f1;">Buy Date</th>
+                        <th style="position: sticky; top: 0; background-color: #f1f1f1;">Sell Date</th>
+                        <th style="position: sticky; top: 0; background-color: #f1f1f1;">Buy Price</th>
+                        <th style="position: sticky; top: 0; background-color: #f1f1f1;">Sell Price</th>
+                        <th style="position: sticky; top: 0; background-color: #f1f1f1;">95% Risk</th>
+                        <th style="position: sticky; top: 0; background-color: #f1f1f1;">99% Risk</th>
+                        <th style="position: sticky; top: 0; background-color: #f1f1f1;">Difference of Price</th>
+                        <th style="position: sticky; top: 0; background-color: #f1f1f1;">Percentage of Profit or Loss</th>
+                        <th style="position: sticky; top: 0; background-color: #f1f1f1;">Profit or Loss</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in output_data %}
+                    <tr class="{% if data['Profit_or_Loss'] == 'Loss' %}profit-loss-negative{% elif data['Profit_or_Loss'] == 'Profit' %}profit-loss-positive{% endif %}">
+                        <td>{{ data['Buy_Date'] }}</td>
+                        <td>{{ data['Sell_Date'] }}</td>
+                        <td>{{ data['Buy_Price'] }}</td>
+                        <td>{{ data['Sell_Price'] }}</td>
+                        <td>{{ data['var95'] }}</td>
+                        <td>{{ data['var99'] }}</td>
+                        <td>{{ data['Difference_of_Price'] }}</td>
+                        <td class="{% if data['Percentage_of_Profit_or_Loss'] > 0 %}profit-loss-positive{% else %}profit-loss-negative{% endif %}">{{ data['Percentage_of_Profit_or_Loss'] }}</td>
+                        <td class="profit-loss-cell {% if data['Profit_or_Loss'] == 'Loss' %}profit-loss-negative{% elif data['Profit_or_Loss'] == 'Profit' %}profit-loss-positive{% endif %}">{{ data['Profit_or_Loss'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="back-btn-container">
+        <a href="/" class="btn">Back to Home</a>
+    </div>
+</div>
+</body>
+</html>
+
