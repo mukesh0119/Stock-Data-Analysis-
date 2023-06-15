@@ -1,0 +1,10 @@
+ plotly==5.14.1
+pandas==1.4.1
+yfinance==0.1.70
+pandas_datareader==0.10.0
+Flask==2.0.3
+boto3==1.21.4
+gunicorn==20.1.0
+jinja2==3.0.3
+werkzeug==2.0.3
+itsdangerous==2.0.1
